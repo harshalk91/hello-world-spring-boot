@@ -1,4 +1,4 @@
-name: Build and push
+name: Build with jib
 on:
   workflow_run:
     workflows: ["Create dockerhub repository"]
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-image:
-    name: Build & Push Image
+    name: Build with jib
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
@@ -20,12 +20,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and push docker image
-        env:
-          REGISTRY: harshalk91
-          REPOSITORY: hello-world-spring-boot
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REPOSITORY:latest .
-          docker push --all-tags $REGISTRY/$REPOSITORY
+      - name: Setup Maven Action
+        uses: s4u/setup-maven-action@3.5.2
+        with:
+          java-version: 8
+          maven-version: 3.5.2
 
+      - run: mvn compile jib:build
+
+      - run: mvn compile jib:dockerBuild
