@@ -5,7 +5,7 @@ resource "dockerhub_repository" "dokerhub_repo" {
   full_description = "Readme."
 }
 
-resource "dockerhub_token" "master_token" {
-  label = "master_token"
-  scopes = ["repo:admin"]
-}
+#resource "dockerhub_token" "master_token" {
+#  label = "master_token"
+#  scopes = ["repo:admin"]
+#}
