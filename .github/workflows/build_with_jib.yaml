@@ -26,6 +26,6 @@ jobs:
           java-version: 8
           maven-version: 3.5.2
 
-      - run: mvn compile jib:build
+      - run: mvn compile myproject:build
 
-      - run: mvn compile jib:dockerBuild
+      - run: mvn compile myproject:dockerBuild
