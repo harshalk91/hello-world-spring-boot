@@ -1,0 +1,29 @@
+name: Build and push
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-image:
+    name: Build & Push Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push docker image
+        env:
+          REGISTRY: harshalk91
+          REPOSITORY: hello-world-spring-boot
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t $REGISTRY/$REPOSITORY:latest .
+          docker push --all-tags $REGISTRY/$REPOSITORY
+
