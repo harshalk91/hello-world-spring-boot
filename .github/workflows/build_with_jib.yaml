@@ -31,6 +31,6 @@ jobs:
           java-version: 8
           maven-version: 3.5.2
 
-      - run: mvn compile -f jib/ jib:build
+      - run: mvn compile -f ./jib/pom.xml jib:build
 
-      - run: mvn compile -f jib/ jib:dockerBuild
+      - run: mvn compile -f ./jib/pom.xml jib:dockerBuild
