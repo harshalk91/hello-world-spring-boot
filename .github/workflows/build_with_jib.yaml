@@ -21,10 +21,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Setup Maven Action
-        uses: s4u/setup-maven-action@3.5.2
+        uses: s4u/setup-maven-action@3.5.4
         with:
           java-version: 8
-          maven-version: 3.5.2
+          maven-version: 3.5.4
 
       - run: mvn compile jib:build
 
