@@ -1,4 +1,4 @@
-name: Security scan
+name: Vulnerability scan
 on:
   workflow_run:
     workflows: ["Build and push"]
@@ -8,11 +8,14 @@ on:
 
 jobs:
   scan:
-    - name: Run Trivy vulnerability scanner in image mode
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'harshalk91/hello-world-spring-boot:latest'
-        trivy-config: trivy.yaml
+    name: Vulnerability scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Trivy vulnerability scanner in image mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'harshalk91/hello-world-spring-boot:latest'
+          trivy-config: trivy.yaml
 
 
 
