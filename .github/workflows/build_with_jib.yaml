@@ -1,10 +1,15 @@
 name: Build with jib
+#on:
+#  workflow_run:
+#    workflows: ["Create dockerhub repository"]
+#    branches: [master]
+#    types:
+#      - completed
 on:
-  workflow_run:
-    workflows: ["Create dockerhub repository"]
-    branches: [master]
-    types:
-      - completed
+  push:
+    branches:
+      - master
+
 
 jobs:
   build-image:
@@ -26,6 +31,6 @@ jobs:
           java-version: 8
           maven-version: 3.5.2
 
-      - run: mvn compile jib:build
+      - run: mvn compile -f jib/ jib:build
 
-      - run: mvn compile jib:dockerBuild
+      - run: mvn compile -f jib/ jib:dockerBuild

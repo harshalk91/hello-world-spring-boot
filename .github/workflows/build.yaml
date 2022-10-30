@@ -1,10 +1,16 @@
 name: Build and push
+#on:
+#  workflow_run:
+#    workflows: ["Create dockerhub repository"]
+#    branches: [master]
+#    types:
+#      - completed
+
 on:
-  workflow_run:
-    workflows: ["Create dockerhub repository"]
-    branches: [master]
-    types:
-      - completed
+  push:
+    branches:
+      - master
+
 
 jobs:
   build-image:
