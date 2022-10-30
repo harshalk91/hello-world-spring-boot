@@ -7,5 +7,5 @@ resource "dockerhub_repository" "dokerhub_repo" {
 
 resource "dockerhub_token" "master_token" {
   label = "master_token"
-  scope =  "repo:admin"
+  scopes = ["repo:admin"]
 }
